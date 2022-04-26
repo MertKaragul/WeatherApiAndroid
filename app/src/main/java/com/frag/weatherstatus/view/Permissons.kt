@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +25,12 @@ import com.frag.weatherstatus.customButtom
 import com.frag.weatherstatus.ui.theme.WeatherStatusTheme
 import com.frag.weatherstatus.util.ScreenSize.Companion.screenHeight
 import com.frag.weatherstatus.util.ScreenSize.Companion.screenWidth
+import com.frag.weatherstatus.view.view.ViewRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.delay
 
 
 @ExperimentalPermissionsApi
@@ -53,7 +56,8 @@ fun Permissions(rememberNavController: NavHostController) {
                 )
                 Text("İzin verildi aktarılıyorsunuz...")
 
-                rememberNavController.navigate("weather_view")
+                Thread.sleep(500)
+                rememberNavController.navigate("${ViewRoute.Weather_view}")
             }
         }
         is PermissionStatus.Denied -> {
@@ -82,5 +86,5 @@ private fun RequestPermission(permission : PermissionState){
         override fun onFinish() {
             permission.launchPermissionRequest()
         }
-    }
+    }.start()
 }

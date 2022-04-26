@@ -11,6 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.frag.weatherstatus.util.ScreenSize
 
@@ -20,7 +23,7 @@ val URL = ""
 
 
 
-val BACKGROUND_COLOR = Color(0xFFFFB700)
+val BACKGROUND_COLOR = Color(0xFF19C3FB)
 
 
 @Composable
@@ -32,3 +35,10 @@ fun customButtom(getText : String , clicked : () -> (Unit)){
         Text(getText)
     }
 }
+
+val fonts = FontFamily(
+    Font(R.font.sourcesanspro_black , weight = FontWeight.Black),
+    Font(R.font.sourcesanspro_bold , weight = FontWeight.Bold),
+    Font(R.font.sourcesanspro_light , weight = FontWeight.Light),
+    Font(R.font.sourcesanspro_semibold , weight = FontWeight.SemiBold),
+)
