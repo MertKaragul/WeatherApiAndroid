@@ -57,6 +57,7 @@ fun Permissions(rememberNavController: NavHostController) {
                 Text("İzin verildi aktarılıyorsunuz...")
 
                 Thread.sleep(500)
+                Text("")
                 rememberNavController.navigate("${ViewRoute.Weather_view}")
             }
         }

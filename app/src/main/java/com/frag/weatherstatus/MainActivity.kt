@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = rememberNavController, startDestination = "${ViewRoute.Permission}"){
                         composable("${ViewRoute.Weather_view}"){
                             WeatherView()
+
                         }
 
                         composable("${ViewRoute.Permission}"){

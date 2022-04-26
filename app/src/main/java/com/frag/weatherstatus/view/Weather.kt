@@ -68,6 +68,7 @@ fun WeatherView(){
         Column(modifier = Modifier.fillMaxWidth() , verticalArrangement = Arrangement.Center , horizontalAlignment = Alignment.CenterHorizontally) {
             Image(painterResource(id = R.drawable.ic_clear) , contentDescription = null , Modifier.width((screenWidth!! * 0.3).dp).height((screenHeight!! * 0.3).dp) , alignment = Alignment.Center , contentScale = ContentScale.Crop)
             Text("7℃" , fontFamily = fonts , fontWeight = FontWeight.SemiBold , fontSize = (fontCurrent * 70).sp)
+            Text("")
         }
     }
 }
