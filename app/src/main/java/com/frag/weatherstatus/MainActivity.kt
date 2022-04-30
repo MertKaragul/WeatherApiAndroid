@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.frag.weatherstatus.mvvm.WeatherViewModel
 import com.frag.weatherstatus.ui.theme.Typography
 import com.frag.weatherstatus.ui.theme.WeatherStatusTheme
 import com.frag.weatherstatus.util.ScreenSize.Companion.getDisplayMetric
@@ -30,6 +31,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalPermissionsApi
 class MainActivity : ComponentActivity() {
+    private val weatherViewModel = WeatherViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -41,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     val rememberNavController = rememberNavController()
                     NavHost(navController = rememberNavController, startDestination = "${ViewRoute.Permission}"){
                         composable("${ViewRoute.Weather_view}"){
-                            WeatherView()
+                            WeatherView(weatherViewModel)
                         }
 
                         composable("${ViewRoute.Permission}"){
