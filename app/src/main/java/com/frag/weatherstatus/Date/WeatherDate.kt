@@ -1,17 +1,22 @@
 package com.frag.weatherstatus.Date
 
 import android.util.Log
+import dagger.hilt.android.scopes.ActivityScoped
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class WeatherDate {
+class WeatherDate @Inject constructor() {
     private val TAG = "WEATHER_DATE"
+    lateinit var date : String
     init{
         val localDateTime = LocalDateTime.now()
-        val format1 = DateTimeFormatter.ofPattern("yyyy-MMMM-dd" , Locale.ENGLISH)
+        val format1 = DateTimeFormatter.ofPattern("dd MMMM,yyyy" , Locale.ENGLISH)
         val formatter = format1.format(localDateTime)
-
-        Log.d(TAG , formatter)
+        formatter?.let {
+            date = it
+        }
     }
 }

@@ -32,14 +32,12 @@ import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
 import kotlinx.coroutines.delay
 
-
 @ExperimentalPermissionsApi
 @Composable
 fun Permissions(rememberNavController: NavHostController) {
     val permission = rememberPermissionState(
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
-
     when (permission.status) {
         PermissionStatus.Granted -> {
             Column(
@@ -57,7 +55,6 @@ fun Permissions(rememberNavController: NavHostController) {
                 Text("İzin verildi aktarılıyorsunuz...")
 
                 Thread.sleep(500)
-                Text("")
                 rememberNavController.navigate("${ViewRoute.Weather_view}")
             }
         }

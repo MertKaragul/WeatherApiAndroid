@@ -12,9 +12,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.frag.weatherstatus.Date.WeatherDate
 import com.frag.weatherstatus.Model.CurrentWeatherModel
+import com.frag.weatherstatus.Model.Weather
 import com.frag.weatherstatus.R
 import com.frag.weatherstatus.mvvm.WeatherViewModel
 import com.frag.weatherstatus.ui.theme.WeatherStatusTheme
@@ -22,11 +24,11 @@ import com.frag.weatherstatus.util.TextTypes
 import com.frag.weatherstatus.util.TextTypes.Companion.bigText
 import com.frag.weatherstatus.util.TextTypes.Companion.bodyText
 import com.frag.weatherstatus.util.TextTypes.Companion.h1Text
+import javax.inject.Inject
 
 @Composable
-fun WeatherView(viewModels : WeatherViewModel = viewModel()){
-    viewModels.getW()
-    val getWeathers : CurrentWeatherModel? = viewModels._getWeathers.observeAsState().value
+fun WeatherView (weatherViewModel: WeatherViewModel = hiltViewModel() , date : WeatherDate = WeatherDate()){
+    val getWeathers : CurrentWeatherModel? = weatherViewModel._getWeathers.value
 
     Column(Modifier.fillMaxSize() , verticalArrangement = Arrangement.Top , horizontalAlignment = Alignment.CenterHorizontally) {
         Row(
@@ -35,16 +37,15 @@ fun WeatherView(viewModels : WeatherViewModel = viewModel()){
             verticalAlignment = Alignment.CenterVertically
         ) {
             h1Text(text = "${getWeathers?.name}")
-            bodyText(text = "14 Nisan Salı")
+            bodyText(text = "${date.date}")
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            bodyText(text = "United States")
-            bodyText(text = "Clear")
-
+            bodyText(text = "${getWeathers?.sys?.country}")
+            bodyText(text = "${getWeathers?.weather?.get(0)?.main}")
         }
 
         Column(modifier = Modifier.fillMaxWidth() , verticalArrangement = Arrangement.Center , horizontalAlignment = Alignment.CenterHorizontally) {
@@ -53,7 +54,7 @@ fun WeatherView(viewModels : WeatherViewModel = viewModel()){
                     .width(300.dp)
                     .height(300.dp) , alignment = Alignment.Center , contentScale = ContentScale.Crop)
             bigText("7°C")
-            TextTypes.h1Text(text = "Wind")
+            h1Text(text = "Wind")
         }
 
         LazyRow(horizontalArrangement = Arrangement.SpaceBetween , verticalAlignment = Alignment.CenterVertically , modifier = Modifier.fillMaxWidth()){
@@ -66,15 +67,5 @@ fun WeatherView(viewModels : WeatherViewModel = viewModel()){
                 }
             }
         }
-    }
-}
-
-
-
-@Preview
-@Composable
-fun Preview_Weather(){
-    WeatherStatusTheme {
-        WeatherView()
     }
 }
