@@ -23,7 +23,7 @@ val URL = ""
 
 
 
-val BACKGROUND_COLOR = Color(0xFFFACE3D)
+val BACKGROUND_COLOR = Color(0xff258ED4)
 
 
 @Composable

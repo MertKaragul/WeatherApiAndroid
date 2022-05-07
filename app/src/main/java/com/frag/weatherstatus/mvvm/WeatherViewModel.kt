@@ -25,10 +25,17 @@ class WeatherViewModel @Inject constructor() : ViewModel(){
     var weatherErrorText : MutableLiveData<String> = MutableLiveData("")
     var weatherLoading : MutableLiveData<Boolean> = MutableLiveData(false)
 
+
+    //Five day variables
+    val fiveWeather : MutableLiveData<FiveDayModel> = MutableLiveData()
+    var fiveWeatherError : MutableLiveData<Boolean> = MutableLiveData(false)
+    var fiveWeatherErrorText : MutableLiveData<String> = MutableLiveData("")
+    var fiveWeatherLoading : MutableLiveData<Boolean> = MutableLiveData(false)
+
     @Inject
     fun getW(){
         weatherLoading.value = true
-        retrofitBuilders.getWeather(weatherType = "weather" ,lat = "35" , long = "139" , appid = "3c7c7fa5da2ec76d599bae0fca61d1af")
+        retrofitBuilders.getWeather(lat = "35" , long = "139" , appid = "3c7c7fa5da2ec76d599bae0fca61d1af")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object : DisposableSingleObserver<CurrentWeatherModel>(){
@@ -42,6 +49,27 @@ class WeatherViewModel @Inject constructor() : ViewModel(){
                     weatherErrorText.value = e.localizedMessage
                     weatherLoading.value = false
                     Log.e("Viewmodel tag" , "$e")
+                }
+            })
+    }
+
+    @Inject
+    fun getFiveDayWeatherStatus(){
+        fiveWeatherLoading.value = true
+        retrofitBuilders.getFiveDay(lat = "35" , long = "139" , appid = "3c7c7fa5da2ec76d599bae0fca61d1af")
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableSingleObserver<FiveDayModel>(){
+                override fun onSuccess(t: FiveDayModel) {
+                    fiveWeather.value = t
+                    fiveWeatherLoading.value = false
+
+                    Log.d("WEATHERVİEWMODEL" , t.toString())
+                }
+                override fun onError(e: Throwable) {
+                    fiveWeatherLoading.value = false
+                    fiveWeatherError.value = true
+                    fiveWeatherErrorText.value = e.localizedMessage
                 }
             })
     }

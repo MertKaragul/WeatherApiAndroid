@@ -52,7 +52,7 @@ data class Main(
 
 data class Wind(
     val speed : Double?,
-    val deg : Int?
+    val deg : Float?
 )
 
 data class Clouds(

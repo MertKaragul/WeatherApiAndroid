@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Projects/WeatherApiAndroid/app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.1" />
         <entry key="..\:/Android_Projects/WeatherApiAndroid/app/src/main/res/drawable/ic_clear.xml" value="0.1435" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.213" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.25" />

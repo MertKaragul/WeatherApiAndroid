@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            weatherViewModel.getFiveDayWeatherStatus()
             WeatherStatusTheme {
                 Scaffold(modifier = Modifier.fillMaxSize() , backgroundColor = BACKGROUND_COLOR) {
                     rememberSystemUiController()
