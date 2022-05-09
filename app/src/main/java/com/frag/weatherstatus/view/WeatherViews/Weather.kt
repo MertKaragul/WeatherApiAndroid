@@ -1,16 +1,18 @@
 package com.frag.weatherstatus.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,7 +41,7 @@ import javax.inject.Inject
 fun WeatherView (weatherViewModel: WeatherViewModel = hiltViewModel() , date : WeatherDate = WeatherDate()){
     val getWeathers : CurrentWeatherModel? = weatherViewModel._getWeathers.value
     val fiveDay : MutableLiveData<FiveDayModel> = weatherViewModel.fiveWeather
-
+    val state = rememberLazyListState()
     Column(Modifier.fillMaxSize() , verticalArrangement = Arrangement.Top , horizontalAlignment = Alignment.CenterHorizontally) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -73,14 +75,28 @@ fun WeatherView (weatherViewModel: WeatherViewModel = hiltViewModel() , date : W
             }
         }
 
-        LazyRow(horizontalArrangement = Arrangement.SpaceBetween , verticalAlignment = Alignment.CenterVertically , modifier = Modifier.fillMaxWidth()){
-            item{
-                if(weatherViewModel.fiveWeatherError.value == true){
-                    Text("${weatherViewModel.fiveWeatherErrorText.value}" , fontSize = 10.sp)
-                }else{
-                    Text("no error")
-                }
+        LazyColumn {
+            // Add a single item
+            item {
+                Text(text = "First item")
+            }
+
+            // Add 5 items
+            items(20) { index ->
+                Text(text = "Item: $index")
+            }
+
+            // Add another single item
+            item {
+                Text(text = "Last item")
             }
         }
     }
+}
+@Preview
+@Composable
+fun previewWeather(){
+
+
+    WeatherView()
 }

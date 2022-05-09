@@ -59,7 +59,6 @@ class MainActivity : ComponentActivity() {
                         composable("${ViewRoute.Permission}"){
                             Permissions(rememberNavController)
                         }
-
                     }
                 }
             }
